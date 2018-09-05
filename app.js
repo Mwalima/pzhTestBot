@@ -384,13 +384,13 @@ bot.dialog('searchES', [
                     var period = 'now-6m/m';
                     break;
                case "afgelopen jaar":
-                    var period = 'now-1y/y';
+                    period = 'now-1y/y';
                     break;
                case "afgelopen 5 jaar":
-                    var period = 'now-5y/y';
+                    period = 'now-5y/y';
                     break;
                default:
-                    var period = 'alles';
+                    period = 'alles';
                     break;            
            }
                    
