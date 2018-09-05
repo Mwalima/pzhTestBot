@@ -79,7 +79,6 @@ var bot = new builder.UniversalBot(connector,
 
 	}
 );
-
 bot.set('storage', tableStorage);
 // bot.set('localizerSettings',{'defaultLocale': "nl"});
 
