@@ -1,0 +1,195 @@
+{
+  "luis_schema_version": "3.0.0",
+  "versionId": "0.1",
+  "name": "Dataloket",
+  "desc": "A chat service to help users find information in and about dataloket.",
+  "culture": "nl-nl",
+  "intents": [
+    {
+      "name": "content_zoeken"
+    },
+    {
+      "name": "informatie_zoeken"
+    },
+    {
+      "name": "None"
+    },
+    {
+      "name": "welcome"
+    }
+  ],
+  "entities": [
+    {
+      "name": "onderwerp",
+      "children": [
+        "andere partij",
+        "molen"
+      ],
+      "roles": []
+    }
+  ],
+  "composites": [],
+  "closedLists": [
+    {
+      "name": "search_info",
+      "subLists": [
+        {
+          "canonicalForm": "data",
+          "list": [
+            "dataset",
+            "datasets",
+            "informatie"
+          ]
+        }
+      ],
+      "roles": []
+    },
+    {
+      "name": "search_item",
+      "subLists": [
+        {
+          "canonicalForm": "rapport",
+          "list": [
+            "rapport",
+            "rapports"
+          ]
+        },
+        {
+          "canonicalForm": "dashboard",
+          "list": ["dashboard", 
+                   "dashboards"]
+        }
+      ],
+      "roles": []
+    }
+  ],
+  "patternAnyEntities": [],
+  "regex_entities": [],
+  "prebuiltEntities": [],
+  "model_features": [],
+  "regex_features": [],
+  "patterns": [],
+  "utterances": [
+    {
+      "text": "halo",
+      "intent": "welcome",
+      "entities": []
+    },
+    {
+      "text": "hi",
+      "intent": "welcome",
+      "entities": []
+    },
+    {
+      "text": "hoi",
+      "intent": "welcome",
+      "entities": []
+    },
+    {
+      "text": "hoi luca",
+      "intent": "welcome",
+      "entities": []
+    },
+    {
+      "text": "ik heb een vraag.",
+      "intent": "welcome",
+      "entities": []
+    },
+    {
+      "text": "ik wil graag data van een ketenpartner.",
+      "intent": "informatie_zoeken",
+      "entities": [
+        {
+          "entity": "onderwerp",
+          "startPos": 22,
+          "endPos": 37
+        }
+      ]
+    },
+    {
+      "text": "ik wil graag een dashboard.",
+      "intent": "content_zoeken",
+      "entities": [
+        {
+          "entity": "search_item",
+          "startPos": 13,
+          "endPos": 25
+        }
+      ]
+    },
+    {
+      "text": "ik wil rapport aanvragen.",
+      "intent": "content_zoeken",
+      "entities": [{
+          "entity": "search_item",
+          "startPos": 7,
+          "endPos": 13
+        }]
+    },
+    {
+      "text": "ik zoek een dataset",
+      "intent": "informatie_zoeken",
+      "entities": [
+        {
+          "entity": "search_item",
+          "startPos": 12,
+          "endPos": 18
+        }
+      ]
+    },
+    {
+      "text": "ik zoek een rapport over abc.",
+      "intent": "content_zoeken",
+      "entities": [
+        {
+          "entity": "search_item",
+          "startPos": 12,
+          "endPos": 18
+        },
+        {
+          "entity": "onderwerp",
+          "startPos": 25,
+          "endPos": 27
+        }
+      ]
+    },
+    {
+      "text": "waar kan ik dataset vinden?",
+      "intent": "informatie_zoeken",
+      "entities": [
+        {
+          "entity": "search_item",
+          "startPos": 12,
+          "endPos": 18
+        }
+      ]
+    },
+    {
+      "text": "waar kan ik informatie vinden over andere partij?",
+      "intent": "informatie_zoeken",
+      "entities": [
+        {
+          "entity": "search_info",
+          "startPos": 12,
+          "endPos": 21
+        }
+      ]
+    },
+    {
+      "text": "waar kan ik rapports over abc vinden?",
+      "intent": "content_zoeken",
+      "entities": [
+        {
+          "entity": "search_item",
+          "startPos": 12,
+          "endPos": 19
+        },
+        {
+          "entity": "onderwerp",
+          "startPos": 26,
+          "endPos": 28
+        }
+      ]
+    }
+  ]
+}

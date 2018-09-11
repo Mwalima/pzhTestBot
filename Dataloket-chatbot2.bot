@@ -1,0 +1,15 @@
+{
+    "name": "Dataloket-chatbot",
+    "description": "",
+    "secretKey": "",
+    "services": [
+        {
+            "appId": "",
+            "id": "cc4e33e0-a456-11e8-9a15-91ebe1d61fd8",
+            "type": "endpoint",
+            "appPassword": "",
+            "endpoint": "http://localhost:3978",
+            "name": "http://localhost:3978"
+        }
+    ]
+}

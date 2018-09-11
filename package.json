@@ -4,10 +4,14 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "botbuilder": "^3.13.1",
-    "botbuilder-azure": "^3.0.4",
+    "arraylist": "^0.1.0",
+    "botbuilder": "^3.15.0",
+    "botbuilder-azure": "^3.1.0",
+    "elastic-builder": "^2.0.1",
     "elasticsearch": "^15.1.1",
-    "restify": "^5.2.1"
+    "moment": "^2.22.2",
+    "restify": "^5.2.1",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "request": "^2.81.0",
@@ -17,5 +21,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": "8.9.4"
+  }
 }

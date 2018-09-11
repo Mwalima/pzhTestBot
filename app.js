@@ -13,7 +13,6 @@ var es = require('elasticsearch');
 var username = 'chatbot';
 var password = 'CdUsp65HAX29SRnRhJA6wpWdzWP6UeEK';
 
-
 var client = new es.Client({
       hosts: [
         'https://'+ 'chatbot' + ':' + 'CdUsp65HAX29SRnRhJA6wpWdzWP6UeEK' + '@51.144.73.77:9200/content'        
@@ -79,15 +78,15 @@ var bot = new builder.UniversalBot(connector,
 
 	}
 );
+
 bot.set('storage', tableStorage);
 // bot.set('localizerSettings',{'defaultLocale': "nl"});
 
 // Make sure you add code to validate these fields
 // var luisAppId = process.env.LuisAppId;
 // var luisAPIKey = process.env.LuisAPIKey;
-
-var luisAppId = 'ea2b023c-44cf-486d-b041-52d137d89d2e';
-var luisAPIKey = '9c3e00be7d9745f98d73f2ee25a1827c';
+var luisAppId = '46aff7bd-d5d3-4956-8c68-8b8e600a67ae';
+var luisAPIKey = '3dc2141961af40b58a7e1bbb75d0118a';
 var luisAPIHostName = process.env.LuisAPIHostName || 'westeurope.api.cognitive.microsoft.com';
 var bingKey = process.env.BING_SPELL_CHECK_API_KEY;
 var LuisModeUrl = 'https://westeurope.api.cognitive.microsoft.com/luis/v2.0/apps/46aff7bd-d5d3-4956-8c68-8b8e600a67ae?subscription-key=3dc2141961af40b58a7e1bbb75d0118a&spellCheck=false&bing-spell-check-subscription-key=61a806bc5c284aba882cfad4e7bda99e&verbose=true&timezoneOffset=0&q=';
@@ -375,7 +374,7 @@ bot.dialog('searchES', [
        }
    },
    function (session, results){
-       if (results != null){
+       if (results){
            session.dialogData.period = results.response.entity;
            console.log(results.response.entity);
            switch(session.dialogData.period){
@@ -383,13 +382,13 @@ bot.dialog('searchES', [
                     var period = 'now-6m/m';
                     break;
                case "afgelopen jaar":
-                    period = 'now-1y/y';
+                    var period = 'now-1y/y';
                     break;
                case "afgelopen 5 jaar":
-                    period = 'now-5y/y';
+                    var period = 'now-5y/y';
                     break;
                default:
-                    period = 'alles';
+                    var period = 'alles';
                     break;            
            }
                    
@@ -527,7 +526,6 @@ function esQuerySearch(onderwerp, prodType, period, callback){
           } ;
     
     if (period != "alles"){
-        //nakijken query
         if (prodType != "alles"){
             query_body.query.bool.filter = [{"term":{"active":true}}, {"term": {"contentTypeName": prodType}}];
             query_body.query.bool.must_not = {"range":{"createDate":{"lt":period}}};
