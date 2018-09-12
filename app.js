@@ -83,10 +83,10 @@ bot.set('storage', tableStorage);
 // bot.set('localizerSettings',{'defaultLocale': "nl"});
 
 // Make sure you add code to validate these fields
-// var luisAppId = process.env.LuisAppId;
-// var luisAPIKey = process.env.LuisAPIKey;
-var luisAppId = '46aff7bd-d5d3-4956-8c68-8b8e600a67ae';
-var luisAPIKey = '3dc2141961af40b58a7e1bbb75d0118a';
+var luisAppId = process.env.LuisAppId;
+var luisAPIKey = process.env.LuisAPIKey;
+// var luisAppId = '46aff7bd-d5d3-4956-8c68-8b8e600a67ae';
+// var luisAPIKey = '3dc2141961af40b58a7e1bbb75d0118a';
 var luisAPIHostName = process.env.LuisAPIHostName || 'westeurope.api.cognitive.microsoft.com';
 var bingKey = process.env.BING_SPELL_CHECK_API_KEY;
 var LuisModeUrl = 'https://westeurope.api.cognitive.microsoft.com/luis/v2.0/apps/46aff7bd-d5d3-4956-8c68-8b8e600a67ae?subscription-key=3dc2141961af40b58a7e1bbb75d0118a&spellCheck=false&bing-spell-check-subscription-key=61a806bc5c284aba882cfad4e7bda99e&verbose=true&timezoneOffset=0&q=';
@@ -101,18 +101,60 @@ bot.recognizer(recognizer);
 // See https://docs.microsoft.com/en-us/bot-framework/nodejs/bot-builder-nodejs-recognize-intent-luis 
 
 // This welcome message appears as soon as a user opens a chat window to chat with the chatbot.
+// bot.on('conversationUpdate', (message) => {
+//     if (message.membersAdded) {
+//         message.membersAdded.forEach(function (identity) {
+//             if (identity.id == message.address.bot.id) {       
+//                 var x = Math.floor((Math.random() * 10))%2;
+//                 var txt = x==1? 'Hallo! Ik ben Luca.': 'Welkom bij het Dataloket!';      
+//                 txt = txt + '\n U kan hier uw zoekopdracht binnen Dataloket starten. Probeer hele maar eenvoudige zinnen te typen. \n Als u hulp nodig heeft, typ dan help voor een keuze menu. \n Ook met een technisch probleem kan ik u snel helpen.';
+//                 var reply = new builder.Message()
+//                         .address(message.address)
+//                         .text(txt);
+//                 bot.send(reply);      
+//            }
+//         });
+//     }
+// });
 bot.on('conversationUpdate', (message) => {
     if (message.membersAdded) {
         message.membersAdded.forEach(function (identity) {
-            if (identity.id == message.address.bot.id) {       
-                var x = Math.floor((Math.random() * 10))%2;
-                var txt = x==1? 'Hallo! Ik ben Luca.': 'Welkom bij het Dataloket!';      
-                txt = txt + '\n U kan hier uw zoekopdracht binnen Dataloket starten. Probeer hele maar eenvoudige zinnen te typen. \n Als u hulp nodig heeft, typ dan help voor een keuze menu. \n Ook met een technisch probleem kan ik u snel helpen.';
-                var reply = new builder.Message()
-                        .address(message.address)
-                        .text(txt);
-                bot.send(reply);      
-           }
+            if (identity.id == message.address.bot.id) {
+             
+               var d = new Date();
+                var timegreeting = d.getHours();
+                
+                var morning = 6;
+                var afternoon = 12;
+                var evening = 18;
+                var night = 24;
+                var midnight = 0;                
+                var greeting;
+
+                if (timegreeting >= morning && timegreeting < afternoon){
+                    greeting = "Goedemorgen, ";                   
+                    }
+                    else if(timegreeting >= afternoon && timegreeting < evening){
+                    greeting = "Goedemiddag, ";                  
+                    }
+                    else if(timegreeting >= evening && timegreeting < night){
+                    greeting = "Goedenavond, ";                  
+                    }
+                    else if(timegreeting == midnight && timegreeting < morning){
+                    greeting = "Hallo nachtuil, ";                    
+                    }
+                    
+                    var x = Math.floor((Math.random() * 10)) % 2;
+                    txt = x == 1 ? 'Ik ben Luca.' : 'Welkom bij het Dataloket!';
+                    txt = txt +'\n U kan hier uw zoekopdracht binnen Dataloket starten. Probeer hele maar eenvoudige zinnen te typen. \n Als u hulp nodig heeft, typ dan help voor een keuze menu. \n Ook met een technisch probleem kan ik u snel helpen.';
+                    txt = greeting + txt;
+                    
+                   var reply = new builder.Message()
+                     .address(message.address)
+                     .text(txt);
+                    bot.send(reply); 
+                
+        }
         });
     }
 });
@@ -581,7 +623,7 @@ bot.dialog('geholpen', [
             builder.Prompts.choice(session, 'OK! Kan ik u verder helpen?', ['ja', 'nee'],{listStyle: builder.ListStyle.button });
         }
         else if (results.response.entity == 'nee'){
-            session.send('Wat jammer dat ik u op dit moment niet kan helpen. Gelukkig kunt u ook contact opnemen via het formulier van [TopDesk](https://loket.pzh.nl/tas/public/xfg?unid=6f6adaf418c24e318a7c852ca1e66079). Of stuur een bericht naar: e-mail');
+            session.send('Wat jammer dat ik u op dit moment niet kan helpen. Gelukkig kunt u ook contact opnemen via het formulier van [TopDesk](https://loket.pzh.nl/tas/public/xfg?unid=6f6adaf418c24e318a7c852ca1e66079). Of stuur een bericht naar: dataloket@pzh.nl');
         }
     }, 
     function (session,results){
@@ -625,5 +667,7 @@ bot.dialog('dialogFout', [
 //         }
 //     });
 // }
+
+
 
 
